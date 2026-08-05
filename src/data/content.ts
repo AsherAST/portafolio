@@ -1,0 +1,279 @@
+export type Language = "es" | "en";
+
+export interface NavLink {
+  label: string;
+  href: string;
+}
+
+export interface Project {
+  title: string;
+  description: string;
+  stack: string[];
+  features: string[];
+  links: { label: string; href: string }[];
+  image?: string;
+}
+
+export interface SiteContent {
+  personal: {
+    name: string;
+    role: string;
+    email: string;
+    github: string;
+    linkedin: string;
+    location: string;
+  };
+  nav: NavLink[];
+  hero: {
+    greeting: string;
+    role: string;
+    summary: string;
+    ctaProjects: string;
+    ctaContact: string;
+  };
+  about: {
+    title: string;
+    paragraphs: string[];
+    downloadCv: string;
+  };
+  skills: {
+    title: string;
+    subtitle: string;
+    categories: { name: string; items: string[] }[];
+  };
+  projects: {
+    title: string;
+    subtitle: string;
+    viewSite: string;
+    viewCode: string;
+    list: Project[];
+  };
+  contact: {
+    title: string;
+    subtitle: string;
+    form: {
+      name: string;
+      namePlaceholder: string;
+      email: string;
+      emailPlaceholder: string;
+      message: string;
+      messagePlaceholder: string;
+      submit: string;
+      success: string;
+      error: string;
+      errors: {
+        name: string;
+        emailRequired: string;
+        emailInvalid: string;
+        message: string;
+      };
+    };
+  };
+  footer: {
+    rights: string;
+    emailCopied: string;
+  };
+}
+
+export const placeholders = {
+  github: "https://github.com/AsherAST",
+  linkedin: "https://www.linkedin.com/in/damian-espinosa-6b46a8277",
+  cv: "/cv-damian-espinosa.pdf",
+};
+
+export const navLinks: NavLink[] = [
+  { label: "Inicio", href: "#inicio" },
+  { label: "Sobre mí", href: "#sobre-mi" },
+  { label: "Habilidades", href: "#habilidades" },
+  { label: "Proyectos", href: "#proyectos" },
+  { label: "Contacto", href: "#contacto" },
+];
+
+const content: Record<Language, SiteContent> = {
+  es: {
+    personal: {
+      name: "Damian Espinosa",
+      role: "Desarrollador Web",
+      email: "damianespinosadev@gmail.com",
+      github: placeholders.github,
+      linkedin: placeholders.linkedin,
+      location: "México",
+    },
+    nav: navLinks,
+    hero: {
+      greeting: "Hola, soy",
+      role: "Desarrollador Web",
+      summary:
+        "Construyo aplicaciones web modernas y accesibles con React, Next.js y TypeScript, enfocadas en calidad, rendimiento y una gran experiencia de usuario.",
+      ctaProjects: "Ver proyectos",
+      ctaContact: "Contáctame",
+    },
+    about: {
+      title: "Sobre mí",
+      paragraphs: [
+        "Soy desarrollador web apasionado por crear aplicaciones rápidas, accesibles y bien diseñadas. Trabajo principalmente con el ecosistema React/Next.js y TypeScript.",
+        "Me gusta escribir código con buenas prácticas: componentes reutilizables, pruebas automatizadas y despliegue continuo. Siempre estoy aprendiendo y mejorando mis habilidades.",
+      ],
+      downloadCv: "Descargar CV",
+    },
+    skills: {
+      title: "Habilidades",
+      subtitle:
+        "Tecnologías y herramientas que uso para construir aplicaciones web de principio a fin.",
+      categories: [
+        { name: "Frontend", items: ["Next.js", "React", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3", "Tailwind CSS"] },
+        { name: "Backend y APIs", items: ["Node.js", "API Routes (Next.js)", "REST", "Resend (email)"] },
+        { name: "Testing y calidad", items: ["Vitest", "Testing Library", "Playwright", "ESLint"] },
+        { name: "Herramientas", items: ["Git", "GitHub", "Vercel", "npm"] },
+      ],
+    },
+    projects: {
+      title: "Proyectos",
+      subtitle:
+        "Proyectos web reales. Se irán añadiendo más conforme avance mi portafolio.",
+      viewSite: "Ver sitio",
+      viewCode: "Ver código",
+      list: [
+        {
+          title: "Constructora Horizonte",
+          description:
+            "Sitio web profesional para una empresa constructora: páginas de servicios, proyectos con galería, equipo, clientes y formulario de contacto funcional.",
+          stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vitest", "Playwright", "Resend"],
+          features: [
+            "Desarrollado con Next.js 16 y TypeScript",
+            "Suite de pruebas: 10+ componentes con Vitest y tests e2e con Playwright",
+            "Formulario de contacto con envío de emails (Resend)",
+            "Desplegado en Vercel",
+          ],
+          links: [
+            { label: "Ver sitio", href: "https://constructora-six-theta.vercel.app" },
+            { label: "Ver código", href: "https://github.com/AsherAST/constructora" },
+          ],
+        },
+      ],
+    },
+    contact: {
+      title: "Contacto",
+      subtitle:
+        "¿Tienes un proyecto en mente o una oportunidad laboral? Escríbeme y te responderé lo antes posible.",
+      form: {
+        name: "Nombre",
+        namePlaceholder: "Tu nombre",
+        email: "Email",
+        emailPlaceholder: "tu@email.com",
+        message: "Mensaje",
+        messagePlaceholder: "Cuéntame sobre tu proyecto...",
+        submit: "Enviar mensaje",
+        success: "¡Mensaje enviado! Te responderé pronto.",
+        error: "Hubo un error al enviar el mensaje. Inténtalo de nuevo.",
+        errors: {
+          name: "Escribe tu nombre.",
+          emailRequired: "Escribe tu correo electrónico.",
+          emailInvalid: "El correo no es válido.",
+          message: "Escribe tu mensaje.",
+        },
+      },
+    },
+    footer: {
+      rights: "Todos los derechos reservados.",
+      emailCopied: "¡Correo copiado!",
+    },
+  },
+  en: {
+    personal: {
+      name: "Damian Espinosa",
+      role: "Web Developer",
+      email: "damianespinosadev@gmail.com",
+      github: placeholders.github,
+      linkedin: placeholders.linkedin,
+      location: "Mexico",
+    },
+    nav: [
+      { label: "Home", href: "#inicio" },
+      { label: "About", href: "#sobre-mi" },
+      { label: "Skills", href: "#habilidades" },
+      { label: "Projects", href: "#proyectos" },
+      { label: "Contact", href: "#contacto" },
+    ],
+    hero: {
+      greeting: "Hi, I'm",
+      role: "Web Developer",
+      summary:
+        "I build modern, accessible web applications with React, Next.js and TypeScript, focused on quality, performance and great user experience.",
+      ctaProjects: "View projects",
+      ctaContact: "Contact me",
+    },
+    about: {
+      title: "About me",
+      paragraphs: [
+        "I'm a web developer passionate about building fast, accessible and well-designed applications. I mainly work with the React/Next.js ecosystem and TypeScript.",
+        "I enjoy writing code with good practices: reusable components, automated tests and continuous deployment. I'm always learning and improving my skills.",
+      ],
+      downloadCv: "Download CV",
+    },
+    skills: {
+      title: "Skills",
+      subtitle:
+        "Technologies and tools I use to build web applications from start to finish.",
+      categories: [
+        { name: "Frontend", items: ["Next.js", "React", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3", "Tailwind CSS"] },
+        { name: "Backend & APIs", items: ["Node.js", "API Routes (Next.js)", "REST", "Resend (email)"] },
+        { name: "Testing & Quality", items: ["Vitest", "Testing Library", "Playwright", "ESLint"] },
+        { name: "Tools", items: ["Git", "GitHub", "Vercel", "npm"] },
+      ],
+    },
+    projects: {
+      title: "Projects",
+      subtitle:
+        "Real web projects. More will be added as my portfolio grows.",
+      viewSite: "View site",
+      viewCode: "View code",
+      list: [
+        {
+          title: "Constructora Horizonte",
+          description:
+            "Professional website for a construction company: services, projects with gallery, team, clients and a working contact form.",
+          stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vitest", "Playwright", "Resend"],
+          features: [
+            "Built with Next.js 16 and TypeScript",
+            "Test suite: 10+ components with Vitest and e2e tests with Playwright",
+            "Contact form with email delivery (Resend)",
+            "Deployed on Vercel",
+          ],
+          links: [
+            { label: "View site", href: "https://constructora-six-theta.vercel.app" },
+            { label: "View code", href: "https://github.com/AsherAST/constructora" },
+          ],
+        },
+      ],
+    },
+    contact: {
+      title: "Contact",
+      subtitle:
+        "Have a project in mind or a job opportunity? Write to me and I'll get back to you as soon as possible.",
+      form: {
+        name: "Name",
+        namePlaceholder: "Your name",
+        email: "Email",
+        emailPlaceholder: "you@email.com",
+        message: "Message",
+        messagePlaceholder: "Tell me about your project...",
+        submit: "Send message",
+        success: "Message sent! I'll get back to you soon.",
+        error: "There was an error sending the message. Please try again.",
+        errors: {
+          name: "Please enter your name.",
+          emailRequired: "Please enter your email address.",
+          emailInvalid: "The email is not valid.",
+          message: "Please enter your message.",
+        },
+      },
+    },
+    footer: {
+      rights: "All rights reserved.",
+      emailCopied: "Email copied!",
+    },
+  },
+};
+
+export default content;
