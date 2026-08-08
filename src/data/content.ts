@@ -122,7 +122,7 @@ const content: Record<Language, SiteContent> = {
         "Tecnologías y herramientas que uso para construir aplicaciones web de principio a fin.",
       categories: [
         { name: "Frontend", items: ["Next.js", "React", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3", "Tailwind CSS"] },
-        { name: "Backend y APIs", items: ["Node.js", "API Routes (Next.js)", "REST", "Resend (email)"] },
+        { name: "Backend y APIs", items: ["Node.js", "API Routes (Next.js)", "Server Actions", "Prisma ORM", "PostgreSQL (Neon)", "JWT / sesiones", "Zod", "REST", "Resend (email)"] },
         { name: "Testing y calidad", items: ["Vitest", "Testing Library", "Playwright", "ESLint"] },
         { name: "Herramientas", items: ["Git", "GitHub", "Vercel", "npm"] },
       ],
@@ -134,6 +134,24 @@ const content: Record<Language, SiteContent> = {
       viewSite: "Ver sitio",
       viewCode: "Ver código",
       list: [
+        {
+          title: "TaskFlow",
+          description:
+            "Gestor de tareas tipo Kanban full-stack: tableros, columnas y tareas con arrastrar y soltar, registro/login con sesiones seguras y base de datos PostgreSQL.",
+          stack: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL (Neon)", "JWT", "Tailwind CSS", "Vitest", "Playwright"],
+          features: [
+            "Autenticación de cero: bcrypt + sesiones JWT en cookies httpOnly",
+            "Tablero Kanban con drag & drop nativo y actualizaciones optimistas",
+            "Backend con Server Actions + API Routes y validación con Zod",
+            "PostgreSQL (Neon) con Prisma, migraciones y datos de ejemplo",
+            "31 tests unitarios + 2 e2e y CI con GitHub Actions",
+          ],
+          links: [
+            { label: "Ver sitio", href: "https://taskflow-six-lac.vercel.app" },
+            { label: "Ver código", href: "https://github.com/AsherAST/taskflow" },
+          ],
+          image: "/projects/taskflow.png",
+        },
         {
           title: "Constructora Horizonte",
           description:
@@ -217,7 +235,7 @@ const content: Record<Language, SiteContent> = {
         "Technologies and tools I use to build web applications from start to finish.",
       categories: [
         { name: "Frontend", items: ["Next.js", "React", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3", "Tailwind CSS"] },
-        { name: "Backend & APIs", items: ["Node.js", "API Routes (Next.js)", "REST", "Resend (email)"] },
+        { name: "Backend & APIs", items: ["Node.js", "API Routes (Next.js)", "Server Actions", "Prisma ORM", "PostgreSQL (Neon)", "JWT / sessions", "Zod", "REST", "Resend (email)"] },
         { name: "Testing & Quality", items: ["Vitest", "Testing Library", "Playwright", "ESLint"] },
         { name: "Tools", items: ["Git", "GitHub", "Vercel", "npm"] },
       ],
@@ -229,6 +247,24 @@ const content: Record<Language, SiteContent> = {
       viewSite: "View site",
       viewCode: "View code",
       list: [
+        {
+          title: "TaskFlow",
+          description:
+            "Full-stack Kanban task manager: boards, columns and tasks with drag & drop, sign up/login with secure sessions and a PostgreSQL database.",
+          stack: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL (Neon)", "JWT", "Tailwind CSS", "Vitest", "Playwright"],
+          features: [
+            "Authentication from scratch: bcrypt + JWT sessions in httpOnly cookies",
+            "Kanban board with native drag & drop and optimistic updates",
+            "Backend with Server Actions + API Routes and Zod validation",
+            "PostgreSQL (Neon) with Prisma, migrations and seed data",
+            "31 unit tests + 2 e2e tests and GitHub Actions CI",
+          ],
+          links: [
+            { label: "View site", href: "https://taskflow-six-lac.vercel.app" },
+            { label: "View code", href: "https://github.com/AsherAST/taskflow" },
+          ],
+          image: "/projects/taskflow.png",
+        },
         {
           title: "Constructora Horizonte",
           description:

@@ -8,6 +8,7 @@ Portafolio web para buscar trabajo como desarrollador web.
 
 - **Enfoque**: solo desarrollo web (NO se muestran habilidades secundarias: Android, Unity, ML).
 - **Proyectos a mostrar**: por ahora únicamente **constructora**. El objetivo es añadir más proyectos web reales después.
+- **Plan de proyectos**: ver `PLAN_PROYECTOS.md` (roadmap de P1-P4 para llenar el portafolio y aprender backend).
 - **Idioma**: bilingüe ES/EN con conmutador de idioma.
 - **Stack**: Next.js 16 (App Router) + React 19 + TypeScript + Tailwind CSS 4 + Vitest + Playwright.
 - **Deploy**: Vercel.
