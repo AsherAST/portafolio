@@ -22,6 +22,13 @@ Portafolio web para buscar trabajo como desarrollador web.
 | 3 | Hero, About, Skills (solo web) | ✅ Completado | 2026-08-05 |
 | 4 | Projects (constructora), Contact, Footer, API route | ✅ Completado | 2026-08-05 |
 | 5 | Cierre: lint, build, tests e2e, PROGRESO final + deploy | ✅ Completado | 2026-08-05 |
+| 6 | P2 Tienda — **P2.1** Setup + BD | ✅ Completado | 2026-08-09 |
+| 7 | P2 Tienda — **P2.2** Auth | ✅ Completado | 2026-08-09 |
+| 8 | P2 Tienda — **P2.3** Catálogo | ✅ Completado | 2026-08-09 |
+| 9 | P2 Tienda — **P2.4** Carrito | ✅ Completado | 2026-08-09 |
+| 10 | P2 Tienda — **P2.5** Checkout + pedidos | ✅ Completado | 2026-08-09 |
+| 11 | P2 Tienda — **P2.6** Panel admin | ✅ Completado | 2026-08-09 |
+| 12 | P2 Tienda — **P2.7** Cierre + portafolio | ✅ Completado | 2026-08-09 |
 
 ## Sprint 1 — Setup del proyecto (✅ Completado)
 
@@ -146,6 +153,30 @@ Luego se actualiza este documento y se corre la suite de tests.
    - `CONTACT_TO_EMAIL` (tu correo: `damianespinosadev@gmail.com`)
    - `RESEND_API_KEY` (obtenida en resend.com)
 5. Deploy → queda disponible en `https://<proyecto>.vercel.app`.
+
+## P2 — Tienda online (✅ completado)
+
+- [x] **P2.1** Setup proyecto `tienda/` + Prisma schema + migración + seed + deploy base → https://tienda-puce-nine.vercel.app
+- [x] **P2.2** Auth.js v5 (credentials + roles CUSTOMER/ADMIN), registro/login/logout, `proxy.ts` (Next 16) protege `/cuenta`, `/checkout`, `/pedidos`, `/admin`. Páginas login/registro/cuenta/admin. Usuarios demo: demo@tienda.cl/demo1234 · admin@tienda.cl/admin1234. 10 tests ✅ · lint ✅ · build ✅ · deploy ✅ (login+roles verificados con curl en producción)
+- [x] **P2.3** Catálogo: `src/lib/products.ts` (DAL con búsqueda/categoría/precio/orden), `parseCatalogParams`/`buildCatalogUrl` (Zod), `CatalogFilters` (client), `ProductCard`, página `/` con searchParams (Next 16 async) y `/producto/[slug]` con detalle + 404. Placeholder AddToCartButton (P2.4). **22 tests ✅** · lint ✅ · build ✅ · deploy ✅ (búsqueda/filtros/detalle verificados en producción)
+- [x] **P2.4** Carrito en cookie (Server Actions + CartProvider context), badge en navbar, `/carrito` con cantidades/subtotal, placeholder `/checkout`.
+- [x] **P2.5** Checkout simulado con botón directo (placeOrder transaccional + decremento de stock), `/pedidos` y `/pedidos/[id]`, formato compartido, link "Mis pedidos".
+- [x] **P2.6** Admin: CRUD de productos (crear/editar/eliminar, slug autogenerado, stock) y gestión de pedidos (selector de estado, `updateOrderStatus`, solo ADMIN).
+- [x] **P2.7** Diseño pulido: fuente Geist, modo claro fijo, hero en home, navbar sticky, footer, hover en tarjetas, filtros que no pierden la búsqueda, contenedores blancos.
+- [x] **P2.8** Datos de envío en checkout (nombre, dirección, ciudad, teléfono) guardados en Order y mostrados en pedidos/admin.
+- [x] **P2.9** Cancelar pedido devuelve stock, página 404 personalizada, paginación del catálogo (`?pagina=`).
+- [x] **P2.10** Subida de imágenes con Vercel Blob — ProductForm con input de archivo, acciones con FormData + put/del, remotePatterns para blob.
+- [x] **P2.7 (cierre)** README real + CI (GitHub Actions: lint + tests + build + migrate + seed) + screenshot + tienda en el portafolio (ES/EN) + PROGRESO/PLAN actualizados. 62 tests ✅ · lint ✅ · build ✅.
+
+### Progreso por sesión (P2)
+
+| Fecha | Parte | Avance | Siguiente paso |
+|---|---|---|---|
+| 2026-08-09 | P2.1 | Proyecto `tienda/` (Next 16.3 + Tailwind 4) creado. BD `tienda` creada en el proyecto Neon existente. Schema Prisma 7 (User, Product, Order, OrderItem, enums Role/OrderStatus) + migración `init` aplicada. Seed con 6 productos (upsert). `src/lib/db.ts` con `PrismaPg`. Catálogo básico en `/` (dinámico, precios CLP). Lint ✅ · Build ✅ · repo `AsherAST/tienda` · **deploy Vercel: https://tienda-puce-nine.vercel.app** (catálogo verificado HTTP 200) | Empezar P2.2 — Auth |
+| 2026-08-09 | P2.2 | **Auth.js v5 (beta.32)** con Credentials + rol en JWT (`auth.ts`/`auth.config.ts`), Server Actions register/login/logout, `proxy.ts` (Next 16, Node runtime) protege rutas (`/cuenta`, `/checkout`, `/pedidos`, `/admin`). Páginas `/login`, `/registro`, `/cuenta`, `/admin` + Navbar con sesión. Seed con usuario demo + admin. Vitest configurado: **10 tests ✅** · lint ✅ · build ✅ · deploy ✅. Verificado en producción: login demo/admin (302), `/admin` bloqueado sin sesión y para clientes (307→`/login` o `/`), admin accede (200), `/cuenta` con sesión OK | Empezar P2.3 — Catálogo (listado, búsqueda, filtros, detalle) |
+| 2026-08-09 | P2.3 | **Catálogo completo**: DAL `src/lib/products.ts` (getProducts con where dinámico + orden, getProductBySlug, getCategories), `catalog-params.ts` (Zod + buildCatalogUrl + PRICE_FILTERS), `CatalogFilters` client (buscar/categoría/precio/orden), `ProductCard`, página `/` con `searchParams` (Promise en Next 16) y `/producto/[slug]` (detalle + `notFound()`). Placeholder `AddToCartButton` para P2.4. **22 tests ✅** · lint ✅ · build ✅ · deploy ✅. Verificado en producción: `?q=auricular` → Auriculares, `?categoria=Periféricos` → Teclado+Mouse, `?precio=10000` → ≤$10k, detalle 200 con precio/stock/botón, slug inexistente → 404 | Empezar P2.4 — Carrito |
+| 2026-08-09 | P2.4–P2.10 | **Carrito** (cookie + CartProvider + `/carrito`), **checkout** (placeOrder transaccional + stock, `/pedidos` + detalle, datos de envío), **admin** (CRUD productos con Vercel Blob + gestión de pedidos), **pulido UI** (Geist, navbar sticky, hero, filtros sin perder búsqueda, paginación, 404, cancelación devuelve stock). Deploy verificado en producción. **62 tests ✅** · lint ✅ · build ✅ | P2.7 cierre |
+| 2026-08-09 | P2.7 | **Cierre completado**: CI en GitHub Actions (lint + tests + build + migrate deploy + seed, Postgres de servicio), README real del proyecto, screenshot `tienda.png`, proyecto agregado al portafolio (ES/EN en `content.ts` + test Projects corregido para múltiples proyectos, 45 tests ✅ · build ✅), PROGRESO/PLAN actualizados. Fix menor: imágenes incorrectas de Webcam (asfalto) y Base de Carga (audífonos) en el seed → reemplazadas por fotos correctas de Unsplash y actualizadas en la BD de Neon | P2 terminado → siguiente proyecto (P3) |
 
 ## Comandos útiles
 

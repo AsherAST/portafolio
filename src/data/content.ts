@@ -135,6 +135,24 @@ const content: Record<Language, SiteContent> = {
       viewCode: "Ver código",
       list: [
         {
+          title: "Tienda Online",
+          description:
+            "E-commerce full-stack: catálogo con búsqueda y filtros, carrito persistente, checkout con pedidos y panel de administración con roles de usuario.",
+          stack: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL (Neon)", "Auth.js", "Tailwind CSS", "Vitest", "Vercel Blob"],
+          features: [
+            "Autenticación con roles (cliente/admin) usando Auth.js v5",
+            "Catálogo con búsqueda, filtros por categoría/precio y paginación",
+            "Carrito en cookies con checkout transaccional y descuento de stock",
+            "Panel admin: CRUD de productos con imágenes (Vercel Blob) y gestión de pedidos",
+            "62 tests unitarios y CI con GitHub Actions",
+          ],
+          links: [
+            { label: "Ver sitio", href: "https://tienda-puce-nine.vercel.app" },
+            { label: "Ver código", href: "https://github.com/AsherAST/tienda" },
+          ],
+          image: "/projects/tienda.png",
+        },
+        {
           title: "TaskFlow",
           description:
             "Gestor de tareas tipo Kanban full-stack: tableros, columnas y tareas con arrastrar y soltar, registro/login con sesiones seguras y base de datos PostgreSQL.",
@@ -247,6 +265,24 @@ const content: Record<Language, SiteContent> = {
       viewSite: "View site",
       viewCode: "View code",
       list: [
+        {
+          title: "Tienda Online",
+          description:
+            "Full-stack e-commerce: catalog with search and filters, persistent cart, checkout with orders and an admin panel with user roles.",
+          stack: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL (Neon)", "Auth.js", "Tailwind CSS", "Vitest", "Vercel Blob"],
+          features: [
+            "Role-based authentication (customer/admin) with Auth.js v5",
+            "Catalog with search, category/price filters and pagination",
+            "Cookie-based cart with transactional checkout and stock deduction",
+            "Admin panel: product CRUD with images (Vercel Blob) and order management",
+            "62 unit tests and GitHub Actions CI",
+          ],
+          links: [
+            { label: "View site", href: "https://tienda-puce-nine.vercel.app" },
+            { label: "View code", href: "https://github.com/AsherAST/tienda" },
+          ],
+          image: "/projects/tienda.png",
+        },
         {
           title: "TaskFlow",
           description:

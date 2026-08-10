@@ -50,9 +50,12 @@ describe("Projects", () => {
 
   test("los enlaces de proyecto abren en pestaña nueva", () => {
     renderProjects();
+    const article = screen
+      .getByRole("heading", { name: content.es.projects.list[0].title })
+      .closest("article") as HTMLElement;
     for (const link of content.es.projects.list[0].links) {
       expect(
-        screen.getByRole("link", { name: link.label }),
+        within(article).getByRole("link", { name: link.label }),
       ).toHaveAttribute("target", "_blank");
     }
   });

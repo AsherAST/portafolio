@@ -33,11 +33,33 @@ Documento maestro del plan para llenar el portafolio con más proyectos y conseg
 | Proyecto | Descripción | Aprende | Stack | Tiempo est. | Estado |
 |---|---|---|---|---|---|
 | **P1 — TaskFlow** | Gestor de tareas Kanban: tableros, columnas, tareas, drag & drop, login/registro, CRUD | SQL + Prisma, relaciones, auth (sesiones), Server Actions vs API Routes, Zod | Next.js, Prisma, PostgreSQL (Neon), sesiones JWT (jose+bcryptjs), Tailwind | ~3 semanas | ✅ **Completado** — [demo](https://taskflow-six-lac.vercel.app) · [repo](https://github.com/AsherAST/taskflow) |
-| **P2 — Tienda online** | Catálogo, búsqueda/filtros, carrito, checkout (Stripe test o simulado), pedidos, panel admin CRUD de productos | Relaciones BD complejas, roles (cliente/admin), estado del carrito, pagos, imágenes | Next.js, Prisma, PostgreSQL (Neon), Auth.js, Zod, Stripe test | ~4-5 semanas | ⏳ Pendiente |
+| **P2 — Tienda online** | Catálogo, búsqueda/filtros, carrito, checkout (simulado; Stripe test queda como mejora), pedidos, panel admin CRUD de productos | Relaciones BD complejas, roles (cliente/admin), estado del carrito, imágenes | Next.js, Prisma, PostgreSQL (Neon), Auth.js, Zod, Vercel Blob | ~4-5 semanas | ✅ **Completado** — [demo](https://tienda-puce-nine.vercel.app) · [repo](https://github.com/AsherAST/tienda) |
 | **P3 — Dashboard/Sistema de gestión** | Panel admin (inventario/ventas): tablas con búsqueda/paginación, gráficas, alertas de stock bajo, roles admin/viewer, export CSV/PDF | Agregaciones (SUM, GROUP BY), charts, tablas avanzadas, autorización por roles | Next.js, Prisma, Recharts, shadcn/ui | ~3-4 semanas | ⏳ Pendiente |
 | **P4 — Chat en tiempo real** | Salas, historial, "escribiendo…", presencia de usuarios | Tiempo real (SSE/Socket.io), updates optimistas, conexiones | Next.js, SSE o Socket.io, Prisma, sesiones JWT | ~3 semanas | ⏳ Pendiente |
 
 > Nota P4: Vercel free no soporta bien WebSockets → usar SSE o Socket.io en otro hosting (Railway/Fly).
+
+## Desglose P2 — Tienda online (por partes)
+
+> Cada parte termina verificable (build + tests + demo desplegable). Se avanza parte por parte, retomando donde dice el progreso. **No avanzar a la siguiente parte sin verificar la anterior.**
+
+| Parte | Qué incluye | Verificación de la parte | Est. |
+|---|---|---|---|
+| **P2.1** | Setup proyecto `tienda/` (Next 16 + TS + Tailwind), Prisma schema (User, Product, Order, OrderItem), migración + seed, base deployada en Vercel + Neon | `build` ✅ + catálogo poblado visible en Vercel | 1 sesión |
+| **P2.2** | Auth.js (credentials ✅ + roles, registro/login/logout, protección de rutas). OAuth GitHub: pendiente (requiere crear OAuth App → envs `AUTH_GITHUB_ID`/`AUTH_GITHUB_SECRET`; ya condicionado en código) | login/registro funcional, rol admin asignado | ✅ hecho |
+| **P2.3** | Catálogo público: listado de productos, búsqueda, filtros (categoría/precio), detalle de producto | páginas públicas con datos + filtros funcionando | ✅ hecho |
+| **P2.4** | Carrito: agregar/quitar, cantidades, subtotal, persistencia (cookies + BD) | carrito persistente entre recargas | ✅ hecho |
+| **P2.5** | Checkout (simulado; Stripe test queda como mejora) + pedidos (Order/OrderItem) + "Mis pedidos" | compra de prueba completa → pedido en BD | ✅ hecho |
+| **P2.6** | Panel admin: CRUD de productos, gestión de pedidos, autorización por roles | admin puede crear/editar/borrar + ver pedidos | ✅ hecho |
+| **P2.7** | Cierre: README, CI (GitHub Actions), screenshots, deploy final, subir al portafolio (`content.ts` ES/EN) | P2 en el portafolio + CI ✅ + 3 proyectos | ✅ hecho |
+
+## P2 — Estado final (✅ Completado 2026-08-09)
+
+La tienda online quedó terminada: P2.1–P2.10 hechos, 62 tests, CI en GitHub Actions, README real, deploy en Vercel (https://tienda-puce-nine.vercel.app) y proyecto publicado en el portafolio (ES/EN). Mejoras opcionales a futuro: OAuth GitHub, Stripe test real, tests e2e con Playwright.
+
+| Fecha | Avance | Siguiente paso |
+|---|---|---|
+| 2026-08-09 | **P2 Tienda completado**: cierre (CI + README + screenshot + portafolio + PROGRESO/PLAN) y fix de imágenes del seed (Webcam y Base de Carga con fotos correctas de Unsplash, actualizado en la BD de Neon). Proyecto publicado en el portafolio junto a TaskFlow y Constructora | Empezar P3 (ver tabla de proyectos) o postular |
 
 ## Fase 0 — Fundamentos (✅ Completada como parte de P1)
 
@@ -52,7 +74,7 @@ Los fundamentos (SQL + Prisma, auth, Zod) se aprendieron construyendo TaskFlow:
 - [x] Demo desplegado en Vercel (URL real en el portfolio) → https://taskflow-six-lac.vercel.app
 - [x] README profesional: capturas, problema/solución, stack, features, instalación, `.env.example`.
 - [x] Tests: Vitest + Playwright.
-- [~] CI: GitHub Actions (lint + tests en cada push) → **pendiente subir a GitHub** (el PAT no tiene scope `workflow`; requiere un token nuevo con permiso `workflow` o subirlo desde la web).
+- [x] CI: GitHub Actions (lint + tests en cada push) → workflow `ci.yml` subido a `AsherAST/taskflow`, run #1 ✅.
 - [x] Seed data para que el demo se vea poblado.
 - [x] Env vars documentadas, nunca en el repo.
 
@@ -82,3 +104,5 @@ Los fundamentos (SQL + Prisma, auth, Zod) se aprendieron construyendo TaskFlow:
 | 2026-08-08 | Plan inicial creado | Documento maestro + roadmap definido | Fase 0 + P1 TaskFlow |
 | 2026-08-08 | **P1 TaskFlow: app completa** | Projecto `taskflow/` con Next 16, Prisma 7 (SQLite), auth de cero (JWT+bcrypt), Server Actions, Kanban con drag & drop. 31 tests unitarios + 2 e2e ✅, lint ✅, build ✅, README + CI ✅ | Deploy: Neon Postgres + Vercel, push a GitHub, subirlo al portafolio |
 | 2026-08-08 | **P1 TaskFlow: deploy completado** | Migrado a PostgreSQL (Neon) con Prisma 7 (`PrismaPg`), repo `AsherAST/taskflow`, deploy en Vercel: **https://taskflow-six-lac.vercel.app** (login demo verificado, tablero con seed). Envs (DATABASE_URL, AUTH_SECRET) en Vercel. CI listo localmente | Subir TaskFlow al portafolio (`content.ts` ES+EN + screenshot) · generar PAT con scope `workflow` para subir CI · empezar P2 Tienda |
+| 2026-08-09 | **P1 TaskFlow: CI subido a GitHub** | Subido `ci.yml` al repo (PAT nuevo con scope `workflow`), run #1 del workflow ✅ (lint + tests + build + e2e). Rama renombrada a `main`. Portafolio ya incluye TaskFlow con screenshots (commit `3a0d472`) | Empezar P2 Tienda online |
+| 2026-08-09 | **P2 Tienda online: completado** | E-commerce full-stack terminado (P2.1–P2.10): auth con roles, catálogo con búsqueda/filtros/paginación, carrito en cookies, checkout transaccional + pedidos, panel admin (CRUD productos con Vercel Blob + gestión de pedidos). 62 tests ✅ · lint ✅ · build ✅ · CI en GitHub Actions · README real · fix imágenes del seed · publicado en el portafolio (ES/EN + screenshot) | Empezar P3 Dashboard |
