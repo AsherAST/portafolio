@@ -29,6 +29,12 @@ Portafolio web para buscar trabajo como desarrollador web.
 | 10 | P2 Tienda — **P2.5** Checkout + pedidos | ✅ Completado | 2026-08-09 |
 | 11 | P2 Tienda — **P2.6** Panel admin | ✅ Completado | 2026-08-09 |
 | 12 | P2 Tienda — **P2.7** Cierre + portafolio | ✅ Completado | 2026-08-09 |
+| 13 | P3 Dashboard — **P3.1** Setup + BD + seed | ✅ Completado | 2026-08-11 |
+| 14 | P3 Dashboard — **P3.2** Auth roles ADMIN/VIEWER + deploy | ✅ Completado | 2026-08-11 |
+| 15 | P3 Dashboard — **P3.3** Tablas inventario/ventas | ✅ Completado | 2026-08-11 |
+| 16 | P3 Dashboard — **P3.4** KPIs + gráficas Recharts | ✅ Completado | 2026-08-11 |
+| 17 | P3 Dashboard — **P3.5** Roles + export CSV/PDF | ✅ Completado | 2026-08-11 |
+| 18 | P3 Dashboard — **P3.6** Cierre (CI, README, portafolio) | ✅ Completado | 2026-08-11 |
 
 ## Sprint 1 — Setup del proyecto (✅ Completado)
 
@@ -129,6 +135,26 @@ portafolio/
 ### Verificación final
 - Unit: **44/44** ✅ · E2E: **9/9** ✅ · `npm run lint` ✅ · `npm run build` ✅.
 
+## P3 — Dashboard/Sistema de gestión (✅ completado 2026-08-11)
+
+Panel de administración de inventario y ventas, en su propio repo `AsherAST/dashboard`:
+
+- **P3.1** Proyecto `dashboard/` (Next 16 + TS + Tailwind 4), BD `dashboard` en Neon, schema Prisma (User con rol ADMIN/VIEWER, Product con `stockMin`, Order/OrderItem) + migración + seed (2 usuarios, 14 productos, 180 ventas en 90 días).
+- **P3.2** Auth.js v5 con credenciales y rol en JWT, registro/login/logout, `proxy.ts` protege todo (login/registro públicos; `/admin` solo ADMIN). Shell del panel con sidebar. **10 tests** ✅ · deploy base + auth verificado en producción (login admin/viewer, redirecciones).
+- **P3.3** Tablas de **Inventario** (búsqueda nombre/SKU, filtros categoría/stock bajo/agotado, orden, paginación, badge de estado, banner de alerta) y **Ventas** (búsqueda, filtro por estado, orden, paginación). DALs con Zod para params. **24 tests** ✅.
+- **P3.4** Dashboard `/inicio`: KPIs (ingresos, ticket promedio, unidades, pedidos pendientes, stock bajo) y gráficas **Recharts** (ventas por día 30d, por categoría, top productos, pedidos por estado). Agregaciones en `stats.ts`. **30 tests** ✅.
+- **P3.5** Roles: `/admin` (usuarios, solo ADMIN), banner de solo lectura para VIEWER, link Usuarios oculto. Export CSV (`/api/export/inventario`, `/api/export/ventas`, respetan filtros) y PDF (`/api/export/pdf` con pdf-lib). **32 tests** ✅.
+- **P3.6** README real + CI (GitHub Actions: lint + tests + build + migrate + seed) + deploy conectado a Git (**auto-deploy por push a `main` verificado**) + proyecto publicado en el portafolio (ES/EN). 32 tests ✅ · lint ✅ · build ✅.
+- **Verificación en producción**: login admin/viewer, `/admin` bloqueado para VIEWER (307→/inicio), banner solo lectura, CSV/PDF descargables (PDF válido v1.7).
+
+## P3.6 — Cierre (✅ Completado)
+
+- **CI**: `.github/workflows/ci.yml` (lint + tests + build + `prisma migrate deploy` + seed con Postgres de servicio).
+- **README** profesional con features, stack, configuración y usuarios de prueba.
+- **Deploy conectado a Git**: repo `AsherAST/dashboard`, integración Vercel (`vercel git connect`) → cada push a `main` se autodespliega (verificado: push P3.4 y P3.5 desplegados automáticamente).
+- **Portafolio**: proyecto Dashboard agregado a `content.ts` (ES/EN). 45 tests ✅ · lint ✅ · build ✅.
+- Screenshot del dashboard: pendiente (no se pudo generar en esta sesión por limitaciones del entorno; el campo `image` del proyecto quedó vacío).
+
 ## Guía para añadir proyectos futuros
 
 Cada nuevo proyecto web se agrega como objeto en `src/data/content.ts` dentro del array `projects` (campo `projects` del diccionario de cada idioma), siguiendo la forma del proyecto `constructora`:
@@ -177,6 +203,31 @@ Luego se actualiza este documento y se corre la suite de tests.
 | 2026-08-09 | P2.3 | **Catálogo completo**: DAL `src/lib/products.ts` (getProducts con where dinámico + orden, getProductBySlug, getCategories), `catalog-params.ts` (Zod + buildCatalogUrl + PRICE_FILTERS), `CatalogFilters` client (buscar/categoría/precio/orden), `ProductCard`, página `/` con `searchParams` (Promise en Next 16) y `/producto/[slug]` (detalle + `notFound()`). Placeholder `AddToCartButton` para P2.4. **22 tests ✅** · lint ✅ · build ✅ · deploy ✅. Verificado en producción: `?q=auricular` → Auriculares, `?categoria=Periféricos` → Teclado+Mouse, `?precio=10000` → ≤$10k, detalle 200 con precio/stock/botón, slug inexistente → 404 | Empezar P2.4 — Carrito |
 | 2026-08-09 | P2.4–P2.10 | **Carrito** (cookie + CartProvider + `/carrito`), **checkout** (placeOrder transaccional + stock, `/pedidos` + detalle, datos de envío), **admin** (CRUD productos con Vercel Blob + gestión de pedidos), **pulido UI** (Geist, navbar sticky, hero, filtros sin perder búsqueda, paginación, 404, cancelación devuelve stock). Deploy verificado en producción. **62 tests ✅** · lint ✅ · build ✅ | P2.7 cierre |
 | 2026-08-09 | P2.7 | **Cierre completado**: CI en GitHub Actions (lint + tests + build + migrate deploy + seed, Postgres de servicio), README real del proyecto, screenshot `tienda.png`, proyecto agregado al portafolio (ES/EN en `content.ts` + test Projects corregido para múltiples proyectos, 45 tests ✅ · build ✅), PROGRESO/PLAN actualizados. Fix menor: imágenes incorrectas de Webcam (asfalto) y Base de Carga (audífonos) en el seed → reemplazadas por fotos correctas de Unsplash y actualizadas en la BD de Neon | P2 terminado → siguiente proyecto (P3) |
+
+## Post-P2 — Mejoras y mantenimiento (2026-08-09)
+
+### TaskFlow (P1) — mejoras de producto post-deploy
+
+- **Editar título del tablero y reordenar columnas con drag & drop; renombrar tareas** (commit `e3fb957`): `updateBoard` + componente `BoardTitle.tsx` (título editable inline), `moveColumn` (transacción de posiciones), DnD de columnas con handle ⠿ en `KanbanBoard.tsx`/`ColumnView.tsx` (estado `dragColumnId`, `handleColumnDrop` inserta en el índice del target), renombrado de tareas con `aria-label` "Título de la tarea".
+- **Landing page** (commit `ef75cf1`): `src/app/page.tsx` con hero + CTA a registro, enlace a login y sección de features; redirige a `/boards` si hay sesión.
+- **Fix mobile** (commit `661b522`): botones de tarea siempre visibles (se quitó `opacity-0 group-hover`), creación de tablero con botón "+ Nuevo tablero" que despliega el campo de nombre.
+- **Verificación**: 79 tests unitarios ✅ · lint ✅ · build ✅ · 6 e2e ✅.
+
+### Recuperación de contraseña segura (código OTP por email) — TaskFlow y Tienda
+
+Se reemplazó el flujo inseguro (mostraba la URL/enlace de recuperación en pantalla y filtraba usuarios) por **código OTP de 6 dígitos enviado por email (SMTP)**:
+
+- **Flujo de 3 pantallas**: 1) ingresar correo → se envía el código al email si la cuenta existe (respuesta genérica, sin enumerar usuarios); 2) ingresar correo + código (máx. 5 intentos, 10 min) → se emite un `changeToken` de un solo uso (15 min); 3) nueva contraseña con el `changeToken` oculto.
+- **Seguridad**: código hasheado (sha256), cooldown de reenvío (60 s), intentos limitados, token de un solo uso, el código nunca se devuelve en la respuesta; mensaje neutral tras solicitar (no revela si el correo tiene cuenta).
+- **Implementación** (ambos proyectos): `lib/password-reset.ts` (OTP + changeToken), `lib/mailer.ts` (Nodemailer; en dev sin SMTP loguea el código en consola, en producción exige SMTP), columnas `codeHash`/`attempts`/`changeTokenHash` en Prisma + migración aplicada en Neon, validators nuevos (`verifyCodeSchema`), ruta/acción `verify-code`, páginas `/reset-password/code` y `/reset-password` (TaskFlow) y `/recuperar/codigo` y `/recuperar/cambiar` (Tienda).
+- **Commits**: TaskFlow `7f1c11b` + `689c214` (mensaje neutral) · Tienda `6a5cb3b` + `9e28e35`.
+- **SMTP en producción**: variables `SMTP_HOST/PORT/SECURE/USER/PASS/FROM` configuradas en Vercel para ambos proyectos con Gmail (app password) y redeploy de producción ✅.
+- **Verificación**: 79 tests unitarios por proyecto ✅ · lint ✅ · build ✅ · e2e TaskFlow 6 ✅.
+
+### Portafolio — deploy
+
+- Deploy manual con `vercel --prod` desde `/mnt/c/Users/Pc/portafolio` (antes `link:null` sin integración Git); luego se conectó el repo a Vercel y se eliminaron el workflow `deploy.yml` y el secret `VERCEL_TOKEN` para evitar dobles deploys.
+- Producción: https://portafolio-pi-eosin.vercel.app muestra **Tienda Online**, **TaskFlow** y **Constructora**.
 
 ## Comandos útiles
 

@@ -171,6 +171,23 @@ const content: Record<Language, SiteContent> = {
           image: "/projects/taskflow.png",
         },
         {
+          title: "Dashboard — Sistema de gestión",
+          description:
+            "Panel de administración de inventario y ventas: KPIs, gráficas de ventas, tablas con búsqueda/paginación y alertas de stock bajo. Roles de administrador y de solo lectura, con exportación CSV/PDF.",
+          stack: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL (Neon)", "Auth.js", "Recharts", "Tailwind CSS", "Vitest", "pdf-lib"],
+          features: [
+            "Roles ADMIN/VIEWER (solo lectura) con panel de usuarios exclusivo para administradores",
+            "Dashboard con KPIs y gráficas Recharts: ventas por día, por categoría, top productos y estados",
+            "Tablas de inventario y ventas con búsqueda, filtros, orden y paginación",
+            "Alertas de stock bajo y exportación de datos a CSV y PDF",
+            "32 tests unitarios y CI con GitHub Actions",
+          ],
+          links: [
+            { label: "Ver sitio", href: "https://dashboard-gamma-roan-35.vercel.app" },
+            { label: "Ver código", href: "https://github.com/AsherAST/dashboard" },
+          ],
+        },
+        {
           title: "Constructora Horizonte",
           description:
             "Sitio web profesional para una empresa constructora: páginas de servicios, proyectos con galería, equipo, clientes y formulario de contacto funcional.",
@@ -300,6 +317,23 @@ const content: Record<Language, SiteContent> = {
             { label: "View code", href: "https://github.com/AsherAST/taskflow" },
           ],
           image: "/projects/taskflow.png",
+        },
+        {
+          title: "Dashboard — Management System",
+          description:
+            "Inventory and sales admin panel: KPIs, sales charts, tables with search/pagination and low-stock alerts. Admin and read-only roles, with CSV/PDF export.",
+          stack: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL (Neon)", "Auth.js", "Recharts", "Tailwind CSS", "Vitest", "pdf-lib"],
+          features: [
+            "ADMIN/VIEWER roles (read-only) with an admin-only user management page",
+            "Dashboard with KPIs and Recharts charts: daily sales, by category, top products and statuses",
+            "Inventory and sales tables with search, filters, sorting and pagination",
+            "Low-stock alerts and CSV/PDF data export",
+            "32 unit tests and GitHub Actions CI",
+          ],
+          links: [
+            { label: "View site", href: "https://dashboard-gamma-roan-35.vercel.app" },
+            { label: "View code", href: "https://github.com/AsherAST/dashboard" },
+          ],
         },
         {
           title: "Constructora Horizonte",
