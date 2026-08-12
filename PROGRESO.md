@@ -37,6 +37,7 @@ Portafolio web para buscar trabajo como desarrollador web.
 | 18 | P3 Dashboard — **P3.6** Cierre (CI, README, portafolio) | ✅ Completado | 2026-08-11 |
 | 19 | P4 Chat — **P4.1** Setup + Socket.io custom server + BD | ✅ Completado | 2026-08-12 |
 | 20 | P4 Chat — **P4.2** Auth (JWT propias + registro/login/logout + protección de rutas) | ✅ Completado | 2026-08-12 |
+| 21 | P4 Chat — **P4.3** Salas + mensajes en tiempo real (Socket.io + persistencia) | ✅ Completado | 2026-08-12 |
 
 ## Sesión 2026-08-12
 
@@ -49,6 +50,15 @@ Portafolio web para buscar trabajo como desarrollador web.
 ## Sesión 2026-08-12 (continuación)
 
 - **P4.2 Chat Auth completado** (repo `chat/`, commit `717d3da`): API routes `POST /api/auth/register|login|logout` (Zod, bcryptjs hash, cookie httpOnly 7 días), sesiones JWT propias (jose) en `src/lib/session.ts`, `getSessionUser`/`requireUser` en `src/lib/auth.ts`, layout `(app)` protege `/cuenta` y `/salas` (redirige a `/login` sin sesión), login/registro redirigen a `/salas` con sesión, `AuthForm` (login/registro) + `Navbar` con logout, home con CTAs si no hay sesión. Verificado en vivo: registro 201 + cookie, login 200, `/cuenta` y `/salas` 200 con sesión, redirección sin sesión. **22 tests ✅** · lint ✅ · build ✅.
+
+## Sesión 2026-08-12 (deploy + P4.3)
+
+- **Repo `chat` subido a GitHub** (`AsherAST/chat`) con commits P4.1/P4.2/deploy.
+- **Deploy probado en Suga** (gratis, siempre encendido): HTTP 200 en `/` y `/api/health`, pero login/registro → 500 `databasenotreachable` (Suga no alcanza Neon desde su red). Koyeb rechaza altas (fusión Mistral), Railway cobra. **Deploy en pausa** — no descartar P4, seguir con funcionalidad.
+- **P4.3 Salas + mensajes en tiempo real completado** (repo `chat/`, commit `93ffcb6`): DAL `src/lib/rooms.ts` (`getRoomById`, `getRoomMessages`, `createRoom`), custom server con **auth de sockets por cookie JWT** y eventos `room:join`/`room:leave`/`message:send` (valida con Zod, persiste en BD y emite `message:new` a la sala), cliente `RoomChat.tsx` (`io({withCredentials:true})`, envía con ack), páginas `/salas` (lista + `CreateRoomForm`) y `/salas/[id]` (historial desde BD, `notFound()` en sala inexistente), Server Action `createRoomAction` (Zod + `refresh()` + `redirect`). **Fix de bug**: `server.ts` no cargaba `.env`, así que `db.ts` en el custom server recibía `undefined` → login 500 en dev; solución `import "dotenv/config"` en `server.ts` + `db.ts` prefiere `DATABASE_URL_UNPOOLED` (evita `channel_binding=require` del pooler que rompe el adapter). Verificado en vivo con dos clientes Socket.io: login demo/guest, ambos hacen `room:join` en `room-general`, demo envía mensaje → guest lo recibe en `message:new` ✅, mensaje persistido en BD ✅, `/salas` 200, `/salas/room-general` 200, sala inexistente 404, sin sesión 307→`/login`. **29 tests ✅** · lint ✅ · build ✅.
+- **Pendientes**:
+  - Screenshot del Dashboard: instalar `libnss3`/`libnspr4` (sudo apt) para que Chromium/Playwright funcione; luego generar `public/projects/dashboard.png` y añadir `image` al proyecto en `content.ts` (ES/EN).
+  - P4: retomar deploy (revisar logs Suga / IP allow en Neon), seguir con P4.4.
 
 ## Sprint 1 — Setup del proyecto (✅ Completado)
 
