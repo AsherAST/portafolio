@@ -203,6 +203,22 @@ const content: Record<Language, SiteContent> = {
             { label: "Ver código", href: "https://github.com/AsherAST/constructora" },
           ],
         },
+        {
+          title: "Chat en tiempo real",
+          description:
+            "Aplicación de chat por salas con Socket.io: mensajes en vivo con persistencia, presencia de usuarios online e indicador de escritura. Custom server Node con sesiones JWT propias.",
+          stack: ["Next.js", "React", "TypeScript", "Socket.io", "Prisma", "PostgreSQL (Neon)", "JWT", "Tailwind CSS", "Vitest"],
+          features: [
+            "Autenticación de cero: bcrypt + sesiones JWT (jose) en cookies httpOnly, aplicada también a las conexiones de Socket.io",
+            "Salas con historial desde la base de datos y envío de mensajes en tiempo real con confirmación (ack)",
+            "Presencia: lista de usuarios en línea por sala, actualizada al entrar, salir o desconectarse",
+            "Indicador 'escribiendo…' en vivo con throttle de emisión",
+            "33 tests unitarios y CI con GitHub Actions",
+          ],
+          links: [
+            { label: "Ver código", href: "https://github.com/AsherAST/chat" },
+          ],
+        },
       ],
     },
     contact: {
@@ -349,6 +365,22 @@ const content: Record<Language, SiteContent> = {
           links: [
             { label: "View site", href: "https://constructora-six-theta.vercel.app" },
             { label: "View code", href: "https://github.com/AsherAST/constructora" },
+          ],
+        },
+        {
+          title: "Real-time Chat",
+          description:
+            "Room-based chat app with Socket.io: live messages with persistence, online user presence and a typing indicator. Custom Node server with custom JWT sessions.",
+          stack: ["Next.js", "React", "TypeScript", "Socket.io", "Prisma", "PostgreSQL (Neon)", "JWT", "Tailwind CSS", "Vitest"],
+          features: [
+            "Authentication from scratch: bcrypt + JWT sessions (jose) in httpOnly cookies, also enforced on Socket.io connections",
+            "Rooms with message history from the database and real-time delivery with acknowledgement (ack)",
+            "Presence: online users per room, updated on join, leave or disconnect",
+            "Live 'typing…' indicator with emission throttling",
+            "33 unit tests and GitHub Actions CI",
+          ],
+          links: [
+            { label: "View code", href: "https://github.com/AsherAST/chat" },
           ],
         },
       ],

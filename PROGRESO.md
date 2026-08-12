@@ -39,6 +39,7 @@ Portafolio web para buscar trabajo como desarrollador web.
 | 20 | P4 Chat — **P4.2** Auth (JWT propias + registro/login/logout + protección de rutas) | ✅ Completado | 2026-08-12 |
 | 21 | P4 Chat — **P4.3** Salas + mensajes en tiempo real (Socket.io + persistencia) | ✅ Completado | 2026-08-12 |
 | 22 | P4 Chat — **P4.4** "escribiendo…" + presencia de usuarios por sala | ✅ Completado | 2026-08-12 |
+| 23 | P4 Chat — **P4.5** Cierre (README, CI, portafolio) | ✅ Completado | 2026-08-12 |
 
 ## Sesión 2026-08-12
 
@@ -64,6 +65,10 @@ Portafolio web para buscar trabajo como desarrollador web.
 ## Sesión 2026-08-12 (P4.4)
 
 - **P4.4 "escribiendo…" + presencia completado** (repo `chat/`, commit `7e9299b`): custom server con **presencia por sala** (`Map<room, userId → {name, sockets}>`, eventos `room:join`/`room:leave`/`disconnect` emiten `presence:update`) y eventos **`typing:start`/`typing:stop`** (se emiten solo a los demás de la sala con `socket.to`). Cliente `RoomChat`: barra superior con avatares (inicial) + conteo "N en línea", indicador "X está escribiendo…" (throttle de emisión 1.5 s, auto-stop tras 3 s, stop al enviar y al desmontar). Verificado en vivo con 2 clientes: ambos ven "2 en línea" (`Damian, Invitado`) ✅, guest recibe `typing:start` (Damian) y `typing:stop` ✅, al desconectarse guest demo ve "1 en línea" ✅. **33 tests ✅** · lint ✅ · build ✅.
+
+## Sesión 2026-08-12 (P4.5 cierre)
+
+- **P4.5 Cierre completado** (repo `chat/`, commit `a1fe80c`): **README real** del proyecto (características, stack, configuración, usuarios de prueba, scripts, estructura) siguiendo el patrón de Tienda; **CI en GitHub Actions** (`.github/workflows/ci.yml`: lint + tests + build en cada push a `main` y PR, env de CI sin BD real) — **run #1 exitoso ✅**; proyecto **"Chat en tiempo real" agregado al portafolio** (`content.ts` ES/EN: título, descripción, stack, 5 features, link al código — 4º proyecto). Deploy sigue **en pausa** (Suga no alcanza Neon). **Pendiente**: screenshot del chat (requiere `sudo apt-get install libnspr4 libnss3` para Chromium/Playwright, usuario lo dejó pendiente) + imagen del Dashboard.
 
 ## Sprint 1 — Setup del proyecto (✅ Completado)
 
