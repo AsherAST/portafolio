@@ -38,6 +38,7 @@ Portafolio web para buscar trabajo como desarrollador web.
 | 19 | P4 Chat — **P4.1** Setup + Socket.io custom server + BD | ✅ Completado | 2026-08-12 |
 | 20 | P4 Chat — **P4.2** Auth (JWT propias + registro/login/logout + protección de rutas) | ✅ Completado | 2026-08-12 |
 | 21 | P4 Chat — **P4.3** Salas + mensajes en tiempo real (Socket.io + persistencia) | ✅ Completado | 2026-08-12 |
+| 22 | P4 Chat — **P4.4** "escribiendo…" + presencia de usuarios por sala | ✅ Completado | 2026-08-12 |
 
 ## Sesión 2026-08-12
 
@@ -58,7 +59,11 @@ Portafolio web para buscar trabajo como desarrollador web.
 - **P4.3 Salas + mensajes en tiempo real completado** (repo `chat/`, commit `93ffcb6`): DAL `src/lib/rooms.ts` (`getRoomById`, `getRoomMessages`, `createRoom`), custom server con **auth de sockets por cookie JWT** y eventos `room:join`/`room:leave`/`message:send` (valida con Zod, persiste en BD y emite `message:new` a la sala), cliente `RoomChat.tsx` (`io({withCredentials:true})`, envía con ack), páginas `/salas` (lista + `CreateRoomForm`) y `/salas/[id]` (historial desde BD, `notFound()` en sala inexistente), Server Action `createRoomAction` (Zod + `refresh()` + `redirect`). **Fix de bug**: `server.ts` no cargaba `.env`, así que `db.ts` en el custom server recibía `undefined` → login 500 en dev; solución `import "dotenv/config"` en `server.ts` + `db.ts` prefiere `DATABASE_URL_UNPOOLED` (evita `channel_binding=require` del pooler que rompe el adapter). Verificado en vivo con dos clientes Socket.io: login demo/guest, ambos hacen `room:join` en `room-general`, demo envía mensaje → guest lo recibe en `message:new` ✅, mensaje persistido en BD ✅, `/salas` 200, `/salas/room-general` 200, sala inexistente 404, sin sesión 307→`/login`. **29 tests ✅** · lint ✅ · build ✅.
 - **Pendientes**:
   - Screenshot del Dashboard: instalar `libnss3`/`libnspr4` (sudo apt) para que Chromium/Playwright funcione; luego generar `public/projects/dashboard.png` y añadir `image` al proyecto en `content.ts` (ES/EN).
-  - P4: retomar deploy (revisar logs Suga / IP allow en Neon), seguir con P4.4.
+  - P4: retomar deploy (revisar logs Suga / IP allow en Neon), seguir con P4.5 (cierre).
+
+## Sesión 2026-08-12 (P4.4)
+
+- **P4.4 "escribiendo…" + presencia completado** (repo `chat/`, commit `7e9299b`): custom server con **presencia por sala** (`Map<room, userId → {name, sockets}>`, eventos `room:join`/`room:leave`/`disconnect` emiten `presence:update`) y eventos **`typing:start`/`typing:stop`** (se emiten solo a los demás de la sala con `socket.to`). Cliente `RoomChat`: barra superior con avatares (inicial) + conteo "N en línea", indicador "X está escribiendo…" (throttle de emisión 1.5 s, auto-stop tras 3 s, stop al enviar y al desmontar). Verificado en vivo con 2 clientes: ambos ven "2 en línea" (`Damian, Invitado`) ✅, guest recibe `typing:start` (Damian) y `typing:stop` ✅, al desconectarse guest demo ve "1 en línea" ✅. **33 tests ✅** · lint ✅ · build ✅.
 
 ## Sprint 1 — Setup del proyecto (✅ Completado)
 
