@@ -35,6 +35,15 @@ Portafolio web para buscar trabajo como desarrollador web.
 | 16 | P3 Dashboard — **P3.4** KPIs + gráficas Recharts | ✅ Completado | 2026-08-11 |
 | 17 | P3 Dashboard — **P3.5** Roles + export CSV/PDF | ✅ Completado | 2026-08-11 |
 | 18 | P3 Dashboard — **P3.6** Cierre (CI, README, portafolio) | ✅ Completado | 2026-08-11 |
+| 19 | P4 Chat — **P4.1** Setup + Socket.io custom server + BD | ✅ Completado | 2026-08-12 |
+
+## Sesión 2026-08-12
+
+- **Portafolio**: push de 5 commits a `origin/main` (verificado sincronizado). Revisión completa: lint ✅ · 45 tests ✅ · build ✅.
+- **P4.1 Chat iniciado** (repo `chat/`): proyecto Next 16 con custom server Node + Socket.io (verificado cliente→ping→pong), BD `chat` en Neon (migración `init` + seed: 2 usuarios, 3 salas, 6 mensajes), libs de auth (jose/bcryptjs) y validators Zod, Vitest 10/10 ✅ · lint ✅ · build ✅. Commit `P4.1 Chat...`.
+- **Pendientes**:
+  - Screenshot del Dashboard: instalar `libnss3`/`libnspr4` (sudo apt) para que Chromium/Playwright funcione; luego generar `public/projects/dashboard.png` y añadir `image` al proyecto en `content.ts` (ES/EN).
+  - P4: subir repo `chat` a GitHub, deploy a Railway (Socket.io), seguir con P4.2 Auth.
 
 ## Sprint 1 — Setup del proyecto (✅ Completado)
 

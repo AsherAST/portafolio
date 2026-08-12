@@ -39,6 +39,18 @@ Documento maestro del plan para llenar el portafolio con más proyectos y conseg
 
 > Nota P4: Vercel free no soporta bien WebSockets → usar SSE o Socket.io en otro hosting (Railway/Fly).
 
+## Desglose P4 — Chat en tiempo real (por partes)
+
+> Deploy en **Railway** (no Vercel) porque el custom server con Socket.io necesita un proceso Node persistente.
+
+| Parte | Qué incluye | Verificación de la parte | Est. |
+|---|---|---|---|
+| **P4.1** | Setup proyecto `chat/` (Next 16 + TS + Tailwind), custom server Node con **Socket.io** (`server.ts`), BD `chat` en Neon, schema Prisma (User, Room, Message) + migración + seed, auth libs (jose/bcryptjs) y validators listos | `build` ✅ + Socket.io responde (cliente conecta y ping→pong) + tests | 1 sesión |
+| **P4.2** | Auth: sesiones JWT propias (jose+bcryptjs), registro/login/logout, protección de rutas | login/registro funcional, sesión persistente | ✅ en curso |
+| **P4.3** | Salas y mensajes: crear/entrar salas, historial desde BD, enviar mensajes por Socket.io y persistir | dos clientes conversando en tiempo real + historial al entrar | pendiente |
+| **P4.4** | Tiempo real avanzado: "escribiendo…" y presencia de usuarios (online/offline) | indicador de escritura y lista de presentes por sala | pendiente |
+| **P4.5** | Cierre: README, CI (GitHub Actions), deploy Railway, screenshot, subir al portafolio (`content.ts` ES/EN) | P4 en el portafolio + CI ✅ + 4 proyectos | pendiente |
+
 ## Desglose P2 — Tienda online (por partes)
 
 > Cada parte termina verificable (build + tests + demo desplegable). Se avanza parte por parte, retomando donde dice el progreso. **No avanzar a la siguiente parte sin verificar la anterior.**
@@ -108,3 +120,4 @@ Los fundamentos (SQL + Prisma, auth, Zod) se aprendieron construyendo TaskFlow:
 | 2026-08-09 | **P2 Tienda online: completado** | E-commerce full-stack terminado (P2.1–P2.10): auth con roles, catálogo con búsqueda/filtros/paginación, carrito en cookies, checkout transaccional + pedidos, panel admin (CRUD productos con Vercel Blob + gestión de pedidos). 62 tests ✅ · lint ✅ · build ✅ · CI en GitHub Actions · README real · fix imágenes del seed · publicado en el portafolio (ES/EN + screenshot) | Empezar P3 Dashboard |
 | 2026-08-09 | **Post-P2: mejoras y seguridad** | **TaskFlow**: editar título de tablero, reordenar columnas con DnD, renombrar tareas, landing page, fix mobile (79 unit + 6 e2e ✅). **Recuperación de contraseña OTP por email (SMTP)** en TaskFlow y Tienda: flujo correo → código → nueva contraseña, código hasheado con cooldown y límite de intentos, sin filtrar usuarios ni exponer enlaces, `changeToken` de un solo uso; migraciones Prisma aplicadas en Neon; SMTP de Gmail configurado en Vercel (ambos) y redeploy ✅ (79 unit por proyecto + lint + build + e2e). Deploy del portafolio conectado a Git (repo `AsherAST/portafolio`) | P3 Dashboard pendiente |
 | 2026-08-11 | **P3 Dashboard completado** | Proyecto `dashboard/` (Next 16 + Prisma + Neon) con: auth roles ADMIN/VIEWER, dashboard de KPIs y gráficas Recharts (ventas por día/categoría/top productos/estados), tablas de inventario y ventas con búsqueda/filtros/paginación, alertas de stock bajo, `/admin` exclusivo de administradores, export CSV/PDF (pdf-lib). 32 tests ✅ · lint ✅ · build ✅ · CI en GitHub Actions · README real · deploy conectado a Git (auto-deploy verificado en producción) · proyecto publicado en el portafolio (ES/EN) | Empezar P4 Chat en tiempo real (o postular) |
+| 2026-08-12 | **P4.1 Chat: setup completado** | Proyecto `chat/` (Next 16 + TS + Tailwind) con **custom server Node + Socket.io** (`server.ts`, verificado: cliente conecta y ping→pong). BD `chat` creada en Neon, schema Prisma (User, Room, Message) + migración `init` aplicada + seed (2 usuarios, 3 salas, 6 mensajes). Libs de auth (session jose, password bcryptjs) y validators Zod. Portafolio pusheado (5 commits), 45 tests ✅ · lint ✅ · build ✅. 10 tests ✅ en chat · lint ✅ · build ✅. **Pendientes**: screenshot del Dashboard (instalar libnss3/libnspr4 para Chromium), deploy P4 en Railway, subir repo chat a GitHub | P4.2 Auth + deploy Railway + screenshot Dashboard |
