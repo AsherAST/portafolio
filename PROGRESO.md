@@ -89,6 +89,22 @@ Portafolio web para buscar trabajo como desarrollador web.
   - `playwright.config.ts`: workers locales limitados a 2 para evitar flakiness del toggle de idioma con el dev server.
 - **Verificación**: 45 tests unitarios ✅ · 9 e2e ✅ · lint ✅ · build ✅.
 
+## Sesión 2026-08-13 (continuación) — CV del portafolio
+
+- **CV real creado** a partir del `HDV (3).pdf` que el usuario pegó en la raíz del repo:
+  - Texto extraído descomprimiendo los streams del PDF con zlib (el PDF es del visor pdf.js, `pdf-parse` no lo lee).
+  - Datos reales del CV: **Damian Alessandro Espinosa**, Ingeniero de Sistemas (Universidad del Valle, 2020–2025), experiencia como Representante de Servicio al Cliente (2025, soporte técnico + Zendesk), Monitor de Ciberseguridad (Univalle, 2025) y Proyecto Universitario de Software (2024, JavaScript/React). Español nativo, Inglés B2.
+- **Contacto (según elección del usuario, "mezcla")**: email y redes del portafolio (`damianespinosadev@gmail.com`, GitHub AsherAST, LinkedIn) + **ubicación real Cali, Colombia** (en vez de "México" del portafolio).
+- **Adaptación a perfil web dev**: el CV se reenfocó a desarrollo web full-stack (Next.js, React, TypeScript, PostgreSQL, etc.) e incluye los **5 proyectos del portafolio** (Tienda Online, Dashboard, Chat, TaskFlow, Constructora) con sus URLs y stack reales.
+- **Revisión del usuario**: no gustó el diseño moderno (sidebar oscuro) → se **replicó el diseño del HDV original** (analizado desde los streams del PDF): hoja minimalista de una columna, tipografía serif, nombre en mayúsculas, líneas delgadas bajo los títulos de sección, correo en azul, viñetas cuadradas.
+- **Contenido final (petición del usuario)**: se mantiene la **experiencia original del HDV** (Representante de Servicio al Cliente 2025, Monitor de Ciberseguridad 2025, Proyecto Universitario 2024) y se **añaden los proyectos del portafolio** con sus herramientas (Next.js, Prisma, PostgreSQL, Auth.js, Socket.io, Zod, Vitest, Playwright, Recharts, Tailwind, Resend) más la sección de habilidades de Desarrollo Web.
+- **PDFs generados** (Chromium de Windows vía Playwright + `page.pdf`, A4, 1 página cada uno):
+  - `public/cv-damian-espinosa.pdf` (ES)
+  - `public/cv-damian-espinosa-en.pdf` (EN)
+  - Ambos con texto buscable (CMap `ToUnicode` + fuentes embebidas), listos para ATS. Ya apuntan desde `placeholders.cv` → `/cv-damian-espinosa.pdf` y el botón "Descargar CV".
+- **Nota entorno**: el PDF no se pudo leer con `pdf-parse`/`pdftotext` (no instalables sin sudo); la extracción por zlib sí funcionó. Para generar PDFs se usó `node.exe` de Windows (Linux node no resuelve `@playwright/test` con Chromium por falta de `libnspr4`/`libnss3` en WSL).
+- **Pendientes**: commit de los 2 PDFs (y decidir sobre `HDV (3).pdf` sin commitear); push a `origin/main` (branch va 5 commits por delante); screenshots de Dashboard/Chat siguen pendientes.
+
 ## Sprint 1 — Setup del proyecto (✅ Completado)
 
 ### Qué se hizo
