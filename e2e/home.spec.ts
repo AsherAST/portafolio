@@ -32,13 +32,16 @@ test("todas las secciones de la portada están presentes", async ({ page }) => {
 test("el proyecto constructora se muestra con sus links", async ({ page }) => {
   await page.goto("/");
   const project = content.es.projects.list[0];
+  const article = page.locator("article", {
+    has: page.getByRole("heading", { name: project.title }),
+  });
 
   await expect(
     page.getByRole("heading", { name: project.title }),
   ).toBeVisible();
   for (const link of project.links) {
     await expect(
-      page.getByRole("link", { name: link.label }),
+      article.getByRole("link", { name: link.label }),
     ).toHaveAttribute("href", link.href);
   }
 });

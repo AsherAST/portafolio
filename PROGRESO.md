@@ -70,6 +70,25 @@ Portafolio web para buscar trabajo como desarrollador web.
 
 - **P4.5 Cierre completado** (repo `chat/`, commit `a1fe80c`): **README real** del proyecto (características, stack, configuración, usuarios de prueba, scripts, estructura) siguiendo el patrón de Tienda; **CI en GitHub Actions** (`.github/workflows/ci.yml`: lint + tests + build en cada push a `main` y PR, env de CI sin BD real) — **run #1 exitoso ✅**; proyecto **"Chat en tiempo real" agregado al portafolio** (`content.ts` ES/EN: título, descripción, stack, 5 features, link al código — 4º proyecto). Deploy sigue **en pausa** (Suga no alcanza Neon). **Pendiente**: screenshot del chat (requiere `sudo apt-get install libnspr4 libnss3` para Chromium/Playwright, usuario lo dejó pendiente) + imagen del Dashboard.
 
+## Sesión 2026-08-13 — Pulido de interfaz del portafolio
+
+- **Rediseño visual completo** de la portada con un look moderno y atractivo para reclutadores/clientes:
+  - **Sistema de diseño** en `globals.css`: gradiente de marca (indigo→violet→sky), texto con gradiente (`text-gradient`), fondo de rejilla (`bg-grid`), animaciones `fade-in-up`/`float`, scroll suave, scrollbar y selección customizados, `prefers-reduced-motion`.
+  - **SectionHeading.tsx** (nuevo): encabezado consistente con eyebrow, título, línea de gradiente y subtítulo, centrado.
+  - **Navbar**: logo con monograma en gradiente, links con subrayado animado al hover, CTA "Hablemos"/"Let's talk" (gradiente), glassmorphism con backdrop-blur. CTA en menú móvil.
+  - **Hero**: badge "Disponible para trabajar" con punto verde pulsante, nombre grande + rol en gradiente, fondo decorativo (grid + blob), CTAs (primario gradiente con flecha, secundario outline), iconos sociales (GitHub/LinkedIn/Email) y barra de stats (4 proyectos, 150+ tests, 100% full-stack).
+  - **About**: 2 columnas — texto + tarjetas de datos rápidos (Ubicación/Email/Enfoque) + botón CV gradiente, y tarjeta "terminal" con snippet de código sintáctico que flota.
+  - **Skills**: tarjetas con icono SVG por categoría en círculo degradado, hover con elevación y borde indigo, chips con hover.
+  - **Projects**: cards en grid (imagen 2/5 + contenido 3/5) con zoom de imagen y overlay al hover; proyectos sin screenshot muestran banner en gradiente con monograma; features con check en círculo degradado; links diferenciados (primario gradiente + outline con icono externo).
+  - **Contact**: tarjetas sociales con icono degradado, valor real (email/URLs), flecha al hover; formulario con inputs redondeados, focus ring indigo, botón submit gradiente y estado de éxito rediseñado.
+  - **Footer**: línea superior en gradiente, monograma, derechos/año, enlaces y botón "volver arriba".
+- **Content bilingüe ampliado** en `content.ts` (ES/EN): `navCta`, `hero.available`, `hero.stats`, y labels/eyebrows de secciones (`about.label` + facts, `skills.label`, `projects.label`, `contact.label`).
+- **Fixes de tests**:
+  - e2e `home.spec`: scoping de links dentro del `<article>` (había 4 proyectos con "Ver sitio").
+  - e2e `contact.spec`: scoping de los campos del formulario (los enlaces sociales con `aria-label="Email"` ya no colisionan con el input).
+  - `playwright.config.ts`: workers locales limitados a 2 para evitar flakiness del toggle de idioma con el dev server.
+- **Verificación**: 45 tests unitarios ✅ · 9 e2e ✅ · lint ✅ · build ✅.
+
 ## Sprint 1 — Setup del proyecto (✅ Completado)
 
 ### Qué se hizo

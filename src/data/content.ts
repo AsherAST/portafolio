@@ -24,24 +24,33 @@ export interface SiteContent {
     location: string;
   };
   nav: NavLink[];
+  navCta: string;
   hero: {
     greeting: string;
+    available: string;
     role: string;
     summary: string;
     ctaProjects: string;
     ctaContact: string;
+    stats: { value: string; label: string }[];
   };
   about: {
+    label: string;
     title: string;
     paragraphs: string[];
     downloadCv: string;
+    factLocation: string;
+    factEmail: string;
+    factFocus: string;
   };
   skills: {
+    label: string;
     title: string;
     subtitle: string;
     categories: { name: string; items: string[] }[];
   };
   projects: {
+    label: string;
     title: string;
     subtitle: string;
     viewSite: string;
@@ -49,6 +58,7 @@ export interface SiteContent {
     list: Project[];
   };
   contact: {
+    label: string;
     title: string;
     subtitle: string;
     form: {
@@ -100,23 +110,35 @@ const content: Record<Language, SiteContent> = {
       location: "México",
     },
     nav: navLinks,
+    navCta: "Hablemos",
     hero: {
       greeting: "Hola, soy",
+      available: "Disponible para trabajar",
       role: "Desarrollador Web",
       summary:
         "Construyo aplicaciones web modernas y accesibles con React, Next.js y TypeScript, enfocadas en calidad, rendimiento y una gran experiencia de usuario.",
       ctaProjects: "Ver proyectos",
       ctaContact: "Contáctame",
+      stats: [
+        { value: "4", label: "Proyectos desplegados" },
+        { value: "150+", label: "Pruebas automatizadas" },
+        { value: "100%", label: "Enfoque full-stack" },
+      ],
     },
     about: {
+      label: "Quién soy",
       title: "Sobre mí",
       paragraphs: [
         "Soy desarrollador web apasionado por crear aplicaciones rápidas, accesibles y bien diseñadas. Trabajo principalmente con el ecosistema React/Next.js y TypeScript.",
         "Me gusta escribir código con buenas prácticas: componentes reutilizables, pruebas automatizadas y despliegue continuo. Siempre estoy aprendiendo y mejorando mis habilidades.",
       ],
       downloadCv: "Descargar CV",
+      factLocation: "Ubicación",
+      factEmail: "Email",
+      factFocus: "Enfoque",
     },
     skills: {
+      label: "Stack",
       title: "Habilidades",
       subtitle:
         "Tecnologías y herramientas que uso para construir aplicaciones web de principio a fin.",
@@ -128,6 +150,7 @@ const content: Record<Language, SiteContent> = {
       ],
     },
     projects: {
+      label: "Trabajo",
       title: "Proyectos",
       subtitle:
         "Proyectos web reales. Se irán añadiendo más conforme avance mi portafolio.",
@@ -222,6 +245,7 @@ const content: Record<Language, SiteContent> = {
       ],
     },
     contact: {
+      label: "Contacto",
       title: "Contacto",
       subtitle:
         "¿Tienes un proyecto en mente o una oportunidad laboral? Escríbeme y te responderé lo antes posible.",
@@ -264,23 +288,35 @@ const content: Record<Language, SiteContent> = {
       { label: "Projects", href: "#proyectos" },
       { label: "Contact", href: "#contacto" },
     ],
+    navCta: "Let's talk",
     hero: {
       greeting: "Hi, I'm",
+      available: "Available for work",
       role: "Web Developer",
       summary:
         "I build modern, accessible web applications with React, Next.js and TypeScript, focused on quality, performance and great user experience.",
       ctaProjects: "View projects",
       ctaContact: "Contact me",
+      stats: [
+        { value: "4", label: "Deployed projects" },
+        { value: "150+", label: "Automated tests" },
+        { value: "100%", label: "Full-stack focus" },
+      ],
     },
     about: {
+      label: "Who I am",
       title: "About me",
       paragraphs: [
         "I'm a web developer passionate about building fast, accessible and well-designed applications. I mainly work with the React/Next.js ecosystem and TypeScript.",
         "I enjoy writing code with good practices: reusable components, automated tests and continuous deployment. I'm always learning and improving my skills.",
       ],
       downloadCv: "Download CV",
+      factLocation: "Location",
+      factEmail: "Email",
+      factFocus: "Focus",
     },
     skills: {
+      label: "Stack",
       title: "Skills",
       subtitle:
         "Technologies and tools I use to build web applications from start to finish.",
@@ -292,6 +328,7 @@ const content: Record<Language, SiteContent> = {
       ],
     },
     projects: {
+      label: "Work",
       title: "Projects",
       subtitle:
         "Real web projects. More will be added as my portfolio grows.",
@@ -386,6 +423,7 @@ const content: Record<Language, SiteContent> = {
       ],
     },
     contact: {
+      label: "Contact",
       title: "Contact",
       subtitle:
         "Have a project in mind or a job opportunity? Write to me and I'll get back to you as soon as possible.",

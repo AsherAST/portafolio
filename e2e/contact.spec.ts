@@ -17,10 +17,11 @@ test("enviar el formulario vacío muestra errores de validación", async ({
 test("enviar un email inválido muestra el error de correo", async ({ page }) => {
   await page.goto("/");
   const form = content.es.contact.form;
+  const formElement = page.locator("form");
 
-  await page.getByLabel(form.name).fill("Ana");
-  await page.getByLabel(form.email).fill("correo-invalido");
-  await page.getByLabel(form.message).fill("Hola");
+  await formElement.getByLabel(form.name).fill("Ana");
+  await formElement.getByLabel(form.email).fill("correo-invalido");
+  await formElement.getByLabel(form.message).fill("Hola");
   await page.getByRole("button", { name: form.submit }).click();
 
   await expect(page.getByText(form.errors.emailInvalid)).toBeVisible();
