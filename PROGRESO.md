@@ -105,6 +105,17 @@ Portafolio web para buscar trabajo como desarrollador web.
 - **Nota entorno**: el PDF no se pudo leer con `pdf-parse`/`pdftotext` (no instalables sin sudo); la extracción por zlib sí funcionó. Para generar PDFs se usó `node.exe` de Windows (Linux node no resuelve `@playwright/test` con Chromium por falta de `libnspr4`/`libnss3` en WSL).
 - **Pendientes**: commit de los 2 PDFs (y decidir sobre `HDV (3).pdf` sin commitear); push a `origin/main` (branch va 5 commits por delante); screenshots de Dashboard/Chat siguen pendientes.
 
+## Sesión 2026-08-13 — SEO y descubrimiento
+
+- **SEO técnico implementado** para que el portafolio se encuentre (y se vea bien al compartir):
+  - `src/app/sitemap.ts` → `/sitemap.xml` (indexación en Google).
+  - `src/app/robots.ts` → `/robots.txt` con el sitemap.
+  - `layout.tsx`: `metadataBase`, `metadata` completa con Open Graph + Twitter Card + canonical + keywords + authors, y JSON-LD **Schema.org Person** (nombre, rol, email, ubicación Cali/CO, GitHub/LinkedIn).
+  - `public/og.png` (1200×630) generado con Chromium: vista previa al compartir en WhatsApp/LinkedIn (fondo oscuro con grid, monograma DE, nombre, rol y stack).
+- **CV**: se añadió la URL del portafolio (`portafolio-pi-eosin.vercel.app`) a la línea de contacto de los PDFs ES/EN (siguen en 1 página A4).
+- **Verificación**: 45 tests ✅ · lint ✅ · build ✅ (`/robots.txt` y `/sitemap.xml` prerenderizados estáticos).
+- **Pasos B (usuario, pendientes)**: poner la URL en LinkedIn ("Website" + proyectos), pinear `portafolio` en GitHub y link en bio, **Google Search Console** (verificar propiedad + enviar `sitemap.xml`), compartir en comunidades de devs, considerar dominio propio (`damianespinosa.dev`).
+
 ## Sprint 1 — Setup del proyecto (✅ Completado)
 
 ### Qué se hizo
