@@ -96,7 +96,7 @@ export default function Hero() {
                     ? "noopener noreferrer"
                     : undefined
                 }
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 text-zinc-600 transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-300 hover:text-indigo-600 hover:shadow-md dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-indigo-500/50 dark:hover:text-indigo-400"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-md shadow-indigo-500/25 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/40"
               >
                 <svg
                   className="h-4 w-4"
@@ -104,7 +104,7 @@ export default function Hero() {
                   viewBox="0 0 24 24"
                   aria-hidden="true"
                 >
-                  <path d={socialIcons[social.label]} />
+                  <path d={socialIcons[social.label.toLowerCase()]} />
                 </svg>
               </a>
             ))}

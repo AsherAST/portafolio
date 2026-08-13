@@ -107,7 +107,7 @@ const content: Record<Language, SiteContent> = {
       email: "damianespinosadev@gmail.com",
       github: placeholders.github,
       linkedin: placeholders.linkedin,
-      location: "México",
+      location: "Cali, Colombia",
     },
     nav: navLinks,
     navCta: "Hablemos",
@@ -279,7 +279,7 @@ const content: Record<Language, SiteContent> = {
       email: "damianespinosadev@gmail.com",
       github: placeholders.github,
       linkedin: placeholders.linkedin,
-      location: "Mexico",
+      location: "Cali, Colombia",
     },
     nav: [
       { label: "Home", href: "#inicio" },

@@ -47,14 +47,14 @@ export default function Contact() {
                 }
                 className="group flex items-center gap-4 rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-lg hover:shadow-indigo-500/10 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-indigo-500/40"
               >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500/10 to-violet-500/10 text-indigo-600 ring-1 ring-inset ring-indigo-500/20 transition-colors group-hover:from-indigo-600 group-hover:to-violet-600 group-hover:text-white dark:text-indigo-400">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-md shadow-indigo-500/25">
                   <svg
                     className="h-5 w-5"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
-                    <path d={contactIcons[link.label]} />
+                    <path d={contactIcons[link.label.toLowerCase()]} />
                   </svg>
                 </span>
                 <span className="flex-1">
